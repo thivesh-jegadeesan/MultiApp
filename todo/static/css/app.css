@@ -1,0 +1,19 @@
+/* App css file */
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #d3d5cc4f;
+}
+.box{
+    background-color: #d3d5cc4f;
+}
+
+h3{
+    text-align: center;
+}
+.center{
+    text-align: center;
+}
+table, tr {
+    width: 100%;
+    background-color: #d1eaf3;
+}

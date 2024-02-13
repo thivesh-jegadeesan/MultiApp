@@ -1,0 +1,45 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+{% block title %}Todo - Create{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h3>Todo - Create New Task</h3>
+        <div class="box">
+            <form method="POST" action="{% url 'create_new' %}">
+
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="title">Title  </label> <br>
+                        <input type="text" name="title" placeholder="Enter the title" required>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Description">Description  </label> <br>
+                        <textarea name="Description" required  placeholder="Enter the description"></textarea>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="completed">Completed  </label> <br>
+                        <input type="checkbox" name="completed">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/todo/home" class="btn btn-primary btn-sm">Back</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>  
+</div>
+{% endblock %}
