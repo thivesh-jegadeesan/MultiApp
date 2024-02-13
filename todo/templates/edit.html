@@ -1,0 +1,52 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+{% block title %}Todo - Create{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <h3>Todo - Edit New Task</h3>
+        <div class="box">
+            {% comment %} <form method="POST" action="{% url 'update_task' pk=form.pk %}"> {% endcomment %}
+                <form method="POST" action="{% url 'update_task' pk=form.instance.pk %}">
+
+
+
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="title">Title  </label> <br>
+                        {% comment %} <input type="text" name="title" value="{{form.title}}" required> {% endcomment %}
+                        {{form.title}}
+                        
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="Description">Description  </label> <br>
+                        {% comment %} <textarea name="Description" required>{{form.description}}</textarea> {% endcomment %}
+                        {{form.description}}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="completed">Completed  </label> <br>
+
+                        {{form.completed}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="/todo/home" class="btn btn-secondary btn-sm">Back</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>  
+</div>
+{% endblock %}
