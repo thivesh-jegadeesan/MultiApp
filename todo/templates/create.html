@@ -18,17 +18,20 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label for="title">Title  </label> <br>
-                        <input type="text" name="title" placeholder="Enter the title" required>
+                        {% comment %} <input type="text" name="title" placeholder="Enter the title" required> {% endcomment %}
+                        {{form.title}}
                     </div>
 
                     <div class="col-md-4">
                         <label for="Description">Description  </label> <br>
-                        <textarea name="Description" required  placeholder="Enter the description"></textarea>
+                        {{form.description}}
+                        {% comment %} <textarea name="Description" required  placeholder="Enter the description"></textarea> {% endcomment %}
                     </div>
 
                     <div class="col-md-4">
                         <label for="completed">Completed  </label> <br>
-                        <input type="checkbox" name="completed">
+                        {{form.completed}}
+                        {% comment %} <input type="checkbox" name="completed"> {% endcomment %}
                     </div>
                 </div>
                 <div class="row">

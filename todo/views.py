@@ -11,7 +11,8 @@ def home(request):
 
 def create(request):
     todos = Todo.objects.all()
-    return render(request, 'create.html', {'todos': todos})
+    form = TodoModelForm()
+    return render(request, 'create.html', {'todos': todos, 'form': form})
 
 def create_new(request):
     if request.method == 'POST':
@@ -21,5 +22,4 @@ def create_new(request):
             return redirect(reverse('home'))
     else:
         form = TodoModelForm()
-    # print(form)
     return render(request, 'create.html', {'form': form})
