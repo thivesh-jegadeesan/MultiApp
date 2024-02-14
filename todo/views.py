@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TodoModelForm
 from .models import Todo
 from django.urls import reverse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -42,4 +44,11 @@ def update_task(request, pk):
         form = TodoModelForm()
     return render(request, 'edit.html', {'form': form})
 
-    
+@csrf_exempt
+def delete_task(request, pk):
+    task = get_object_or_404(Todo, pk=pk)
+
+    if request.method == 'POST':
+        task.delete()
+        return JsonResponse({"success":True}, status=200)
+    return JsonResponse({"success":False}, status=400)

@@ -17,3 +17,13 @@ table, tr {
     width: 100%;
     background-color: #d1eaf3;
 }
+.modelbox{
+    height: auto;
+    display: none;
+    z-index: 12 !important;
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    background-color: #f6f6f6;
+    border-radius: 12px;
+}
