@@ -1,8 +1,10 @@
 <!-- templates/about.html -->
-{% extends 'base.html' %}
-{% load static %}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% extends 'base.html' %} {% load static %}
+<link
+  rel="stylesheet"
+  href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+/>
+<link rel="stylesheet" href="{% static 'css/app.css' %}" />
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- Include your JavaScript file -->
@@ -10,146 +12,212 @@
 
 {% block title %}Todo - Home{% endblock %}
 <style>
-  .modelbox{
+  .modelbox {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+  }
 </style>
 
 {% block content %}
 
 <div class="container-fluid">
-    <h3>Todo - Task Manager</h3>
-   
-    <div class="row">
-        <div class="col-md-12">
-            <div class="">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Task No</th>
-                            <th>Tasks</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for todo in todos %}
-                            <tr>
-                                <td>{{ forloop.counter}}</td>
-                                <td>{{todo.title}}
-                                  <input type="text" value="{{todo.title}}" hidden id="title_{{todo.pk}}">
-                                </td>
-                                <td>{{todo.description}}
-                                  <input type="text" value="{{todo.description}}" hidden id="description_{{todo.pk}}">
-                                </td>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        {% if todo.completed %}
-                                            <input class="form-check-input" disabled type="checkbox" role="switch" id="flexSwitchCheckDefault" checked>
-                                        {% else %}
-                                            <input class="form-check-input" disabled type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                        {% endif %}
-                                  <input type="text" value="{{todo.completed}}" hidden id="completed_{{todo.pk}}">
-                                  <label class="form-check-label" for="flexSwitchCheckDefault">completed</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                        <a href="{% url 'edit_todo' pk=todo.pk %}" class="btn btn-primary btn-sm">Edit</a>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            {% comment %} <button  onclick="document.getElementById('id01').style.display='block'" class="btn btn-danger btn-sm">Delete</button> {% endcomment %}
-                                            <!-- templates/about.html -->
-                                            <button onclick="deleteTaskConfirmation({{ todo.id }})" class="btn btn-danger btn-sm">Delete</button>
-
-                                        </div>
-                                    </div>
-                            </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                <a href="/todo/create" class="btn btn-primary btn-sm">Add new</a>
-            </div>
-        </div>
-    </div>
-        
-    <div id="modelbox" class="modelbox" style="height: auto; display: none; z-index: 12 !important; position: absolute; top: 40vh; left: 20%; background-color: rgb(253 196 196); border-radius: 12px;">
-      <div class="container" style="padding: 10px;">
-        <div class="container">
-          <h5>Are you sure want do delete this Task ?</h5>
-          <p id="title_model">Title: </p>
-          <p id="description_model">Description: </p>
-        </div>
-        <input type="hidden" id="primary_key" value="">
-        <button id="delete_task" onclick ='deleteTask()' style="float: right;" class="btn btn-danger btn-sm">Delete</button>
-        <button onclick="closeDeleteConfirmation()" class="btn btn-secondary btn-sm">Cancel</button>
+  <h3>Todo - Task Manager</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Task No</th>
+              <th>Tasks</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for todo in todos %}
+            <tr>
+              <td>{{ forloop.counter}}</td>
+              <td>
+                {{todo.title}}
+                <input
+                  type="text"
+                  value="{{todo.title}}"
+                  hidden
+                  id="title_{{todo.pk}}"
+                />
+              </td>
+              <td>
+                {{todo.description}}
+                <input
+                  type="text"
+                  value="{{todo.description}}"
+                  hidden
+                  id="description_{{todo.pk}}"
+                />
+              </td>
+              <td>
+                <div class="form-check form-switch">
+                  {% if todo.completed %}
+                  <input
+                    class="form-check-input"
+                    disabled
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    checked
+                  />
+                  {% else %}
+                  <input
+                    class="form-check-input"
+                    disabled
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                  />
+                  {% endif %}
+                  <input
+                    type="text"
+                    value="{{todo.completed}}"
+                    hidden
+                    id="completed_{{todo.pk}}"
+                  />
+                  <label class="form-check-label" for="flexSwitchCheckDefault"
+                    >completed</label
+                  >
+                </div>
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <a
+                      href="{% url 'edit_todo' pk=todo.pk %}"
+                      class="btn btn-primary btn-sm"
+                      >Edit</a
+                    >
+                  </div>
+                  <div class="col-sm-6">
+                    {% comment %}
+                    <button
+                      onclick="document.getElementById('id01').style.display='block'"
+                      class="btn btn-danger btn-sm"
+                    >
+                      Delete
+                    </button>
+                    {% endcomment %}
+                    <!-- templates/about.html -->
+                    <button
+                      onclick="deleteTaskConfirmation({{ todo.id }})"
+                      class="btn btn-danger btn-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="/todo/create" class="btn btn-primary btn-sm">Add new</a>
       </div>
     </div>
+  </div>
+  <div
+    id="modelbox"
+    class="modelbox"
+    style="
+      height: auto;
+      display: none;
+      z-index: 12 !important;
+      position: absolute;
+      top: 40vh;
+      left: 20%;
+      background-color: rgb(253 196 196);
+      border-radius: 12px;
+    "
+  >
+    <div class="container" style="padding: 10px">
+      <div class="container">
+        <h5>Are you sure want do delete this Task ?</h5>
+        <p id="title_model">Title:</p>
+        <p id="description_model">Description:</p>
+      </div>
+      <input type="hidden" id="primary_key" value="" />
+      <button
+        id="delete_task"
+        onclick="deleteTask()"
+        style="float: right"
+        class="btn btn-danger btn-sm"
+      >
+        Delete
+      </button>
+      <button
+        onclick="closeDeleteConfirmation()"
+        class="btn btn-secondary btn-sm"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
 </div>
 
 <script>
   function closeDeleteConfirmation() {
-      document.getElementById('modelbox').style.display = 'none';
+    document.getElementById("modelbox").style.display = "none";
   }
-
-
-function getCookie(c_name)
-{
-  if (document.cookie.length > 0)
-  {
+  function getCookie(c_name) {
+    if (document.cookie.length > 0) {
       c_start = document.cookie.indexOf(c_name + "=");
-      if (c_start != -1)
-      {
-          c_start = c_start + c_name.length + 1;
-          c_end = document.cookie.indexOf(";", c_start);
-          if (c_end == -1) c_end = document.cookie.length;
-          return unescape(document.cookie.substring(c_start,c_end));
+      if (c_start != -1) {
+        c_start = c_start + c_name.length + 1;
+        c_end = document.cookie.indexOf(";", c_start);
+        if (c_end == -1) c_end = document.cookie.length;
+        return unescape(document.cookie.substring(c_start, c_end));
       }
+    }
+    return "";
   }
-  return "";
-}
 
-  function deleteTask(){
+  function deleteTask() {
     var taskId = document.getElementById("primary_key").value;
-    console.log(taskId, "taskID")
-    var csrftoken = getCookie('csrftoken');
-    console.log('CSRF Token:', csrftoken);
+    console.log(taskId, "taskID");
+    var csrftoken = getCookie("csrftoken");
+    console.log("CSRF Token:", csrftoken);
     $.ajax({
-      type: 'POST',
+      type: "POST",
       url: `/todo/delete_task/${taskId}/`,
-      headers: { 'X-CSRFToken': csrftoken },  // Replace with the actual URL of your delete view
+      headers: { "X-CSRFToken": csrftoken }, // Replace with the actual URL of your delete view
       headers: { "X-CSRFToken": getCookie("csrftoken") },
-      dataType: 'json',
+      dataType: "json",
       success: function (data) {
-        console.log(data, "data")
-          if (data.success) {
-              // Handle successful deletion (e.g., update UI, remove task from the list)
-              // For now, just closing the confirmation modal
-              closeDeleteConfirmation();
-              location.reload();
-          } else {
-              // Handle deletion failure (e.g., show an error message)
-              console.error('Error:', data.error);
-          }
+        console.log(data, "data");
+        if (data.success) {
+          // Handle successful deletion (e.g., update UI, remove task from the list)
+          // For now, just closing the confirmation modal
+          closeDeleteConfirmation();
+          location.reload();
+        } else {
+          // Handle deletion failure (e.g., show an error message)
+          console.error("Error:", data.error);
+        }
       },
       error: function (xhr, status, error) {
-          console.log('AJAX Error:', status, error);
-      }
-  });
+        console.log("AJAX Error:", status, error);
+      },
+    });
   }
 
   function deleteTaskConfirmation(taskId) {
-    var title = document.getElementById("title_"+taskId).value;
-    var description = document.getElementById("description_"+taskId).value;
-    document.getElementById('modelbox').style.display = 'block';
-    document.getElementById("title_model").innerHTML = 'Title: '+title;
-    document.getElementById("description_model").innerHTML = 'Description: '+description;
+    var title = document.getElementById("title_" + taskId).value;
+    var description = document.getElementById("description_" + taskId).value;
+    document.getElementById("modelbox").style.display = "block";
+    document.getElementById("title_model").innerHTML = "Title: " + title;
+    document.getElementById("description_model").innerHTML =
+      "Description: " + description;
     document.getElementById("primary_key").value = taskId;
   }
 </script>

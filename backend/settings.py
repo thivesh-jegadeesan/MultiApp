@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "todo",
     "corsheaders",
     "rest_framework",
+    "masters",
 ]
  
 
